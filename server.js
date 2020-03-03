@@ -1,11 +1,20 @@
 const express = require('express')
-const app = express()
-const port = 3000
-var sf = require('node-salesforce');
+const app = express();
+var cors = require('cors')
+const port = 3000;
 
+var sf = require('node-salesforce');
+// app.use(cors())
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.get('/', (req, res) => res.send('Hello World!'));
 
 app.get('/login', (req,res)=>{
+
   var conn = new sf.Connection({
   // you can change loginUrl to connect to sandbox or prerelease env.
   loginUrl : 'https://test.salesforce.com'
@@ -27,13 +36,13 @@ app.get('/login', (req,res)=>{
 
 
     var records = [];
-      conn.query("select project__r.id, project__r.name, Parcel__r.ParcelId__c,  id from Project_Parcel__c", function(err, result) {
+      conn.query("select project__r.id, project__r.name, project__r.projectStatus__c, Parcel__r.ParcelId__c,  id from Project_Parcel__c", function(err, result) {
         if (err) { return console.error(err); }
         console.log("total : " + result.totalSize);
         console.log("fetched : " + result.records.length);
         console.log("done ? : " + result.done);
         // if (result.done) {
-          res.send(result)
+          res.json(result)
           // you can use the locator to fetch next records set.
           // Connection#queryMore()
           // console.log("next records URL : " + result.nextRecordsUrl);
