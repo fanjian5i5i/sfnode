@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express();
 var cors = require('cors')
-const port = 3000;
+const port = 3001;
 
 var sf = require('node-salesforce');
 // app.use(cors())
@@ -36,7 +36,7 @@ app.get('/login', (req,res)=>{
 
 
     var records = [];
-      conn.query("select project__r.id, project__r.name, project__r.projectStatus__c, Parcel__r.ParcelId__c,  id from Project_Parcel__c", function(err, result) {
+      conn.query("select project__r.id, project__r.name, project__r.OwnerId, project__r.projectStatus__c, Parcel__r.ParcelId__c,  id from Project_Parcel__c", function(err, result) {
         if (err) { return console.error(err); }
         console.log("total : " + result.totalSize);
         console.log("fetched : " + result.records.length);

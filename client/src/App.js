@@ -1,19 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Map } from '@esri/react-arcgis';
+import { Scene ,WebScene  } from '@esri/react-arcgis';
 import FeatureLayer from './FeatureLayer';
 function App() {
   return (
-    <div>
-    <Map style={{ width: '100vw', height: '100vh' }}
-    mapProperties={{ basemap: 'gray-vector' }} 
-    viewProperties={{
-          center: [-71.0589, 42.3601],
-          zoom: 12
-      }}>
-      <FeatureLayer />
-    </Map>
+    <div style={{ width: '100vw', height: '100vh' }}>
+
+    <WebScene id="ebd695da5f2b46e3b1bd9aebee839037" >
+    <FeatureLayer/></WebScene>
     </div>
   );
 }

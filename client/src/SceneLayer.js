@@ -10,7 +10,7 @@ const BermudaTriangle = (props) => {
         fetch('http://localhost:3001/login').then((response) => {
             return response.json();
           }).then((result) => {
-            console.log(result);
+            
             let temp = [];
             result.records.forEach((record,index)=>{
                 if(index<2000){
@@ -18,8 +18,7 @@ const BermudaTriangle = (props) => {
                     temp.push({
                         pid:record.Parcel__r.ParcelID__c,
                         name:record.Project__r?record.Project__r.Name:"",
-                        status:record.Project__r?record.Project__r.ProjectStatus__c:"",
-                        owner:record.Project__r?record.Project__r.OwnerId:"",
+                        status:record.Project__r?record.Project__r.ProjectStatus__c:""
                     })
                 }
             })
@@ -111,7 +110,7 @@ const BermudaTriangle = (props) => {
                               var template = {
                                 // NAME and COUNTY are fields in the service containing the Census Tract (NAME) and county of the feature
                                 title: "{name} ({pid})",
-                                content:"Status : " + record.status + "<br> Owner: " + record.owner
+                                content:"Status : " + record.status 
                                     
                                 
                               };
@@ -121,8 +120,7 @@ const BermudaTriangle = (props) => {
                                   attributes:{
                                       'name':record.name,
                                       'pid':record.pid,
-                                      'status':record.status,
-                                      'owner':record.owner
+                                      'status':record.status
                                   },
                                   popupTemplate:template
                               });
