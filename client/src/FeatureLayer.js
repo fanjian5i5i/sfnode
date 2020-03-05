@@ -7,7 +7,7 @@ const BermudaTriangle = (props) => {
     const [data, setData] = useState([]);
     const [pids, setPids] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:3000/login').then((response) => {
+        fetch('http://zpbraapp01:3000/login').then((response) => {
             return response.json();
           }).then((result) => {
             
@@ -28,7 +28,7 @@ const BermudaTriangle = (props) => {
           });
     },[])
     useEffect(() => {
-        loadModules(['esri/Graphic',"esri/tasks/QueryTask","esri/tasks/support/Query","esri/layers/FeatureLayer","esri/layers/GraphicsLayer"]).then(([Graphic,QueryTask,Query,FeatureLayer,GraphicsLayer]) => {
+        loadModules(['esri/Graphic',"esri/tasks/QueryTask","esri/tasks/support/Query","esri/layers/FeatureLayer","esri/layers/GraphicsLayer","esri/widgets/Legend"]).then(([Graphic,QueryTask,Query,FeatureLayer,GraphicsLayer,Legend]) => {
         let qTask = new QueryTask({
             url: "https://services.arcgis.com/sFnw0xNflSi8J0uh/ArcGIS/rest/services/Parcels2019/FeatureServer/0"
           });
@@ -137,14 +137,13 @@ const BermudaTriangle = (props) => {
                             });  
                 })
                 console.log(graphics)
-
                 
-
+               
                 
             
         }
     })
-    },[data])
+    },[data]);
     // useEffect(() => {
     //     if(pids.length > 999){
     //         // console.log(pids.length)   
